@@ -5,3 +5,22 @@ query me {
     avatarUrl
   }
 }
+
+query seeCoffeeShops($lastId: Int) {
+  seeCoffeeShops(lastId: $lastId) {
+    id
+    name
+    photos {
+      id
+      url
+    }
+    user {
+      username
+      avatarUrl
+    }
+    categories {
+      id
+      name
+    }
+  }
+}

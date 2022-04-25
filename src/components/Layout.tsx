@@ -1,16 +1,20 @@
 import { ReactNode } from "react";
-import { ViewProps } from "react-native";
-import styled from "styled-components/native";
+import { SafeAreaView, StyleProp, ViewProps, ViewStyle } from "react-native";
 
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: transparent;
-`;
+const style: StyleProp<ViewStyle> = {
+  flex: 1,
+  backgroundColor: "transparent",
+};
 
 interface Props extends ViewProps {
   children: ReactNode;
+  safeAreaView?: boolean;
 }
 
 export default function Layout({ children, ...rest }: Props) {
-  return <Container {...rest}>{children}</Container>;
+  return (
+    <SafeAreaView style={style} {...rest}>
+      {children}
+    </SafeAreaView>
+  );
 }

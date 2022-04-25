@@ -5,8 +5,9 @@ import Search from "../screens/Search";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Image, StyleSheet } from "react-native";
 import useMe from "../hooks/useMe";
+import { TabsNavParamList } from "../types/navigator";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabsNavParamList>();
 
 export default function TabsNav() {
   const me = useMe();
@@ -14,7 +15,6 @@ export default function TabsNav() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarStyle: {
           backgroundColor: "transparent",
           borderTopWidth: StyleSheet.hairlineWidth,
@@ -23,6 +23,8 @@ export default function TabsNav() {
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "rgba(255, 255, 255, 0.5)",
         tabBarShowLabel: false,
+        headerStyle: { backgroundColor: "transparent" },
+        headerTintColor: "white",
       }}
     >
       <Tab.Screen
@@ -32,6 +34,7 @@ export default function TabsNav() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
+          headerTitle: "Nomad Coffee",
         }}
       />
       <Tab.Screen

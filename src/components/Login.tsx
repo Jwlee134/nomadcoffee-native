@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Keyboard,
-  SafeAreaView,
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-} from "react-native";
+import { Keyboard, StyleProp, TextStyle, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
@@ -17,6 +11,7 @@ import { logUserIn } from "../libs/auth";
 import Button from "./Button";
 import Input from "./Input";
 import Text from "./Text";
+import Layout from "./Layout";
 
 const ToggleContainer = styled.View`
   margin-top: 10px;
@@ -72,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <Layout safeAreaView>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -138,6 +133,6 @@ export default function Login() {
           </TouchableOpacity>
         </ToggleContainer>
       </KeyboardAwareScrollView>
-    </SafeAreaView>
+    </Layout>
   );
 }

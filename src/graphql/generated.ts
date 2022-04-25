@@ -204,6 +204,13 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, avatarUrl?: string | null } | null };
 
+export type SeeCoffeeShopsQueryVariables = Exact<{
+  lastId?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type SeeCoffeeShopsQuery = { __typename?: 'Query', seeCoffeeShops?: Array<{ __typename?: 'CoffeeShop', id: number, name: string, photos?: Array<{ __typename?: 'CoffeeShopPhoto', id: number, url: string } | null> | null, user: { __typename?: 'User', username: string, avatarUrl?: string | null }, categories?: Array<{ __typename?: 'Category', id: number, name: string } | null> | null } | null> | null };
+
 
 export const LoginDocument = gql`
     mutation login($username: String!, $password: String!) {
@@ -318,3 +325,51 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const SeeCoffeeShopsDocument = gql`
+    query seeCoffeeShops($lastId: Int) {
+  seeCoffeeShops(lastId: $lastId) {
+    id
+    name
+    photos {
+      id
+      url
+    }
+    user {
+      username
+      avatarUrl
+    }
+    categories {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useSeeCoffeeShopsQuery__
+ *
+ * To run a query within a React component, call `useSeeCoffeeShopsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeeCoffeeShopsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeeCoffeeShopsQuery({
+ *   variables: {
+ *      lastId: // value for 'lastId'
+ *   },
+ * });
+ */
+export function useSeeCoffeeShopsQuery(baseOptions?: Apollo.QueryHookOptions<SeeCoffeeShopsQuery, SeeCoffeeShopsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SeeCoffeeShopsQuery, SeeCoffeeShopsQueryVariables>(SeeCoffeeShopsDocument, options);
+      }
+export function useSeeCoffeeShopsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeeCoffeeShopsQuery, SeeCoffeeShopsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SeeCoffeeShopsQuery, SeeCoffeeShopsQueryVariables>(SeeCoffeeShopsDocument, options);
+        }
+export type SeeCoffeeShopsQueryHookResult = ReturnType<typeof useSeeCoffeeShopsQuery>;
+export type SeeCoffeeShopsLazyQueryHookResult = ReturnType<typeof useSeeCoffeeShopsLazyQuery>;
+export type SeeCoffeeShopsQueryResult = Apollo.QueryResult<SeeCoffeeShopsQuery, SeeCoffeeShopsQueryVariables>;
