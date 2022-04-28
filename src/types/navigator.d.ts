@@ -10,3 +10,8 @@ export type ProfileScreenProps = BottomTabScreenProps<
   TabsNavParamList,
   "Profile"
 >;
+
+export type SearchScreenProps = BottomTabScreenProps<
+  TabsNavParamList,
+  "Search"
+>;
