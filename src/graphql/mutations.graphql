@@ -21,3 +21,22 @@ mutation createAccount(
     token
   }
 }
+
+mutation createCoffeeShop(
+  $name: String!
+  $latitude: String!
+  $longitude: String!
+  $photos: [Upload]!
+  $categories: [String]!
+) {
+  createCoffeeShop(
+    name: $name
+    latitude: $latitude
+    longitude: $longitude
+    photos: $photos
+    categories: $categories
+  ) {
+    ok
+    error
+  }
+}

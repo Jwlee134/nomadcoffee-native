@@ -3,13 +3,13 @@ import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Search from "../screens/Search";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import useMe from "../hooks/useMe";
-import { TabsNavParamList } from "../types/navigator";
+import { TabsNavParamList, TabsNavScreenProps } from "../types/navigator";
 
 const Tab = createBottomTabNavigator<TabsNavParamList>();
 
-export default function TabsNav() {
+export default function TabsNav({ navigation }: TabsNavScreenProps) {
   const me = useMe();
 
   return (
@@ -44,6 +44,22 @@ export default function TabsNav() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="search" color={color} size={size} />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="UploadNav"
+        component={View}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate("UploadNav");
+          },
+        }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="cloud-upload" color={color} size={size} />
+          ),
+          headerTitle: "Select Photo",
         }}
       />
       <Tab.Screen

@@ -208,6 +208,17 @@ export type CreateAccountMutationVariables = Exact<{
 
 export type CreateAccountMutation = { __typename?: 'Mutation', createAccount?: { __typename?: 'MutationResponse', ok: boolean, token?: string | null } | null };
 
+export type CreateCoffeeShopMutationVariables = Exact<{
+  name: Scalars['String'];
+  latitude: Scalars['String'];
+  longitude: Scalars['String'];
+  photos: Array<InputMaybe<Scalars['Upload']>> | InputMaybe<Scalars['Upload']>;
+  categories: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CreateCoffeeShopMutation = { __typename?: 'Mutation', createCoffeeShop?: { __typename?: 'MutationResponse', ok: boolean, error?: string | null } | null };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -323,6 +334,50 @@ export function useCreateAccountMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateAccountMutationHookResult = ReturnType<typeof useCreateAccountMutation>;
 export type CreateAccountMutationResult = Apollo.MutationResult<CreateAccountMutation>;
 export type CreateAccountMutationOptions = Apollo.BaseMutationOptions<CreateAccountMutation, CreateAccountMutationVariables>;
+export const CreateCoffeeShopDocument = gql`
+    mutation createCoffeeShop($name: String!, $latitude: String!, $longitude: String!, $photos: [Upload]!, $categories: [String]!) {
+  createCoffeeShop(
+    name: $name
+    latitude: $latitude
+    longitude: $longitude
+    photos: $photos
+    categories: $categories
+  ) {
+    ok
+    error
+  }
+}
+    `;
+export type CreateCoffeeShopMutationFn = Apollo.MutationFunction<CreateCoffeeShopMutation, CreateCoffeeShopMutationVariables>;
+
+/**
+ * __useCreateCoffeeShopMutation__
+ *
+ * To run a mutation, you first call `useCreateCoffeeShopMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCoffeeShopMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCoffeeShopMutation, { data, loading, error }] = useCreateCoffeeShopMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      latitude: // value for 'latitude'
+ *      longitude: // value for 'longitude'
+ *      photos: // value for 'photos'
+ *      categories: // value for 'categories'
+ *   },
+ * });
+ */
+export function useCreateCoffeeShopMutation(baseOptions?: Apollo.MutationHookOptions<CreateCoffeeShopMutation, CreateCoffeeShopMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCoffeeShopMutation, CreateCoffeeShopMutationVariables>(CreateCoffeeShopDocument, options);
+      }
+export type CreateCoffeeShopMutationHookResult = ReturnType<typeof useCreateCoffeeShopMutation>;
+export type CreateCoffeeShopMutationResult = Apollo.MutationResult<CreateCoffeeShopMutation>;
+export type CreateCoffeeShopMutationOptions = Apollo.BaseMutationOptions<CreateCoffeeShopMutation, CreateCoffeeShopMutationVariables>;
 export const MeDocument = gql`
     query me {
   me {

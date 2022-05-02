@@ -13,6 +13,7 @@ import { navigatorTheme } from "./src/styles/theme";
 import { useEffect, useState } from "react";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { TOKEN, tokenVar } from "./src/apollo/vars";
+import RootNav from "./src/navigators/RootNav";
 
 export default function App() {
   const [loaded] = useFonts(Ionicons.font);
@@ -41,7 +42,7 @@ export default function App() {
           resizeMode="cover"
         />
         <BlurView style={{ flex: 1 }} intensity={40} tint="dark">
-          <TabsNav />
+          <RootNav />
         </BlurView>
       </NavigationContainer>
     </ApolloProvider>
